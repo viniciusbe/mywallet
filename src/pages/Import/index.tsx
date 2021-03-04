@@ -52,7 +52,7 @@ const Import: React.FC = () => {
 
   return (
     <>
-      <Header size="small" />
+      <Header size="small" currentPage="import" />
       <Container>
         <Title>Importar uma transação</Title>
         <ImportFileContainer>

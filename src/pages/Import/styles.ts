@@ -12,12 +12,12 @@ export const Title = styled.h1`
   font-weight: 500;
   font-size: 36px;
   line-height: 54px;
-  color: #363f5f;
+  color: #eee;
   text-align: center;
 `;
 
 export const ImportFileContainer = styled.section`
-  background: #fff;
+  background: #eee;
   margin-top: 40px;
   border-radius: 5px;
   padding: 64px;
@@ -43,7 +43,7 @@ export const Footer = styled.section`
 
   button {
     background: #ff872c;
-    color: #fff;
+    color: #eee;
     border-radius: 5px;
     padding: 15px 80px;
     border: 0;

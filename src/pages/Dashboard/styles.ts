@@ -21,13 +21,25 @@ export const CardContainer = styled.section`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 32px;
   margin-top: -150px;
+
+  @media handheld and (max-width: 360px) {
+    overflow: scroll;
+  }
+
+  @media screen and (max-width: 888px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 584px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Card = styled.div`
-  background: ${({ total }: CardProps): string => (total ? '#FF872C' : '#fff')};
+  background: ${({ total }: CardProps): string => (total ? '#FF872C' : '#eee')};
   padding: 22px 32px;
   border-radius: 5px;
-  color: ${({ total }: CardProps): string => (total ? '#fff' : '#363F5F')};
+  color: ${({ total }: CardProps): string => (total ? '#eee' : '#363F5F')};
 
   header {
     display: flex;
@@ -61,15 +73,35 @@ export const TableContainer = styled.section`
       text-align: left;
       font-size: 16px;
       line-height: 24px;
+
+      &:last-child,
+      &:nth-child(3) {
+        @media (max-width: 635px) {
+          display: none;
+        }
+      }
     }
 
     td {
       padding: 20px 32px;
       border: 0;
-      background: #fff;
+      background: #eee;
       font-size: 16px;
       font-weight: normal;
       color: #969cb3;
+
+      &:nth-child(2) {
+        @media (max-width: 635px) {
+          border-radius: 0 8px 8px 0;
+        }
+      }
+
+      &:last-child,
+      &:nth-child(3) {
+        @media (max-width: 635px) {
+          display: none;
+        }
+      }
 
       &.title {
         color: #363f5f;
@@ -90,6 +122,9 @@ export const TableContainer = styled.section`
 
     td:last-child {
       border-radius: 0 8px 8px 0;
+      @media (max-width: 635px) {
+        display: none;
+      }
     }
   }
 `;
