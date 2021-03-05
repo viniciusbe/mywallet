@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
-import Logo from '../../assets/logo.svg';
+import Logo from '../../assets/logo_mywallet.svg';
 
 interface HeaderProps {
   size?: 'small' | 'large';
@@ -17,7 +17,22 @@ const Header: React.FC<HeaderProps> = ({
 }: HeaderProps) => (
   <Container size={size} currentPage={currentPage}>
     <header>
-      <img src={Logo} alt="GoFinances" />
+      <div>
+        <img src={Logo} alt="GoFinances" />
+        <div>
+          Icon made by{' '}
+          <a
+            href="https://www.flaticon.com/authors/those-icons"
+            title="Those Icons"
+          >
+            Those Icons
+          </a>{' '}
+          from{' '}
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            www.flaticon.com
+          </a>
+        </div>
+      </div>
       <nav>
         <Link
           to="/"

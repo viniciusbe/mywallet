@@ -20,14 +20,22 @@ export const Container = styled.div<ContainerProps>`
     justify-content: space-between;
     flex-wrap: wrap;
 
-    @media (max-width: 454px) {
-      img {
+    @media (max-width: 543px) {
+      div:first-child {
         margin-bottom: 32px;
       }
     }
 
-    img {
+    div:first-child {
+      text-decoration: none;
       margin-right: 32px;
+      max-width: 300px;
+      font-size: 0.8rem;
+
+      a {
+        text-decoration: none;
+        color: #00adb5;
+      }
     }
 
     nav {
