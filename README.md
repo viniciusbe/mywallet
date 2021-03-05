@@ -31,7 +31,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-This project was based on an application created during the [RocketSeat's](https://rocketseat.com.br/) bootcamp GoStack
+Based on a project created during the [RocketSeat's](https://rocketseat.com.br/) bootcamp GoStack
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
