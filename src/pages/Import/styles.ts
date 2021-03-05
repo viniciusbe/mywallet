@@ -28,6 +28,11 @@ export const Footer = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media (max-width: 604px) {
+    justify-content: center;
+  }
 
   p {
     display: flex;
@@ -35,6 +40,11 @@ export const Footer = styled.section`
     font-size: 12px;
     line-height: 18px;
     color: #969cb3;
+    margin-right: 16px;
+
+    @media (max-width: 604px) {
+      margin-bottom: 16px;
+    }
 
     img {
       margin-right: 5px;
@@ -42,7 +52,7 @@ export const Footer = styled.section`
   }
 
   button {
-    background: #ff872c;
+    background: #00adb5;
     color: #eee;
     border-radius: 5px;
     padding: 15px 80px;
@@ -50,7 +60,7 @@ export const Footer = styled.section`
     transition: background-color 0.2s;
 
     &:hover {
-      background: ${shade(0.2, '#ff872c')};
+      background: ${shade(0.2, '#00adb5')};
     }
   }
 `;

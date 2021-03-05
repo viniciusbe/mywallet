@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FaTrashAlt, FaPlus } from 'react-icons/fa';
 
 import income from '../../assets/income.svg';
 import outcome from '../../assets/outcome.svg';
@@ -12,6 +13,7 @@ import formatValue from '../../utils/formatValue';
 import formatDate from '../../utils/formatDate';
 
 import { Container, CardContainer, Card, TableContainer } from './styles';
+import ModalAddTransaction from '../../components/Modal';
 
 interface Transaction {
   id: string;
@@ -24,6 +26,13 @@ interface Transaction {
   created_at: Date;
 }
 
+interface ICreateTransaction {
+  title: string;
+  value: number;
+  type: 'income' | 'outcome';
+  category: { title: string };
+}
+
 interface Balance {
   income: string;
   outcome: string;
@@ -33,6 +42,7 @@ interface Balance {
 const Dashboard: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [balance, setBalance] = useState<Balance>({} as Balance);
+  const [modalOpen, setModalOpen] = useState(true);
 
   useEffect(() => {
     async function loadTransactions(): Promise<void> {
@@ -60,31 +70,67 @@ const Dashboard: React.FC = () => {
     }
 
     loadTransactions();
-  }, []);
+  }, [transactions]);
+
+  const handleDeleteTransaction = useCallback(
+    async id => {
+      await api.delete(`/transactions/${id}`);
+
+      setTransactions(
+        transactions.filter(transaction => transaction.id !== id),
+      );
+    },
+    [transactions, setTransactions],
+  );
+
+  async function handleAddTransaction(
+    transaction: ICreateTransaction,
+  ): Promise<void> {
+    try {
+      const { data } = await api.post('/transactions', { ...transaction });
+
+      Object.assign(data, {
+        formattedValue: formatValue(data.value, data.type),
+        formattedDate: formatDate(data.created_at),
+      });
+      setTransactions([...transactions, data]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  function toggleModal(): void {
+    setModalOpen(!modalOpen);
+  }
 
   return (
     <>
       <Header currentPage="dashboard" />
+      <ModalAddTransaction
+        isOpen={modalOpen}
+        setIsOpen={toggleModal}
+        handleAddTransaction={handleAddTransaction}
+      />
       <Container>
         <CardContainer>
           <Card>
             <header>
-              <p>Entradas</p>
+              <p>Income</p>
               <img src={income} alt="Income" />
             </header>
             <h1 data-testid="balance-income">{balance.income}</h1>
           </Card>
           <Card>
             <header>
-              <p>Saídas</p>
+              <p>Outcome</p>
               <img src={outcome} alt="Outcome" />
             </header>
             <h1 data-testid="balance-outcome">{balance.outcome}</h1>
           </Card>
           <Card total>
             <header>
-              <p>Total</p>
-              <img src={total} alt="Total" />
+              <p>Balance</p>
+              <img src={total} alt="Balance" />
             </header>
             <h1 data-testid="balance-total">{balance.total}</h1>
           </Card>
@@ -94,10 +140,15 @@ const Dashboard: React.FC = () => {
           <table>
             <thead>
               <tr>
-                <th>Título</th>
-                <th>Preço</th>
-                <th>Categoria</th>
-                <th>Data</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>
+                  Date
+                  <button type="button" onClick={toggleModal}>
+                    <FaPlus />
+                  </button>
+                </th>
               </tr>
             </thead>
 
@@ -109,7 +160,15 @@ const Dashboard: React.FC = () => {
                     {transaction.formattedValue}
                   </td>
                   <td>{transaction.category.title}</td>
-                  <td>{transaction.formattedDate}</td>
+                  <td>
+                    {transaction.formattedDate}
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteTransaction(transaction.id)}
+                    >
+                      <FaTrashAlt />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

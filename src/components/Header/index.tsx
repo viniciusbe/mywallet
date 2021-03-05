@@ -23,21 +23,21 @@ const Header: React.FC<HeaderProps> = ({
           to="/"
           style={
             currentPage === 'dashboard'
-              ? { borderBottom: '2px solid #ff872c' }
+              ? { borderBottom: '2px solid #00adb5' }
               : { opacity: '0.6' }
           }
         >
-          Listagem
+          Account
         </Link>
         <Link
           to="/import"
           style={
             currentPage === 'import'
-              ? { borderBottom: '2px solid #ff872c' }
+              ? { borderBottom: '2px solid #00adb5' }
               : { opacity: '0.6' }
           }
         >
-          Importar
+          Import
         </Link>
       </nav>
     </header>

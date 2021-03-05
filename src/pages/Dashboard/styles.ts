@@ -36,7 +36,7 @@ export const CardContainer = styled.section`
 `;
 
 export const Card = styled.div`
-  background: ${({ total }: CardProps): string => (total ? '#FF872C' : '#eee')};
+  background: ${({ total }: CardProps): string => (total ? '#00adb5' : '#eee')};
   padding: 22px 32px;
   border-radius: 5px;
   color: ${({ total }: CardProps): string => (total ? '#eee' : '#363F5F')};
@@ -73,6 +73,22 @@ export const TableContainer = styled.section`
       text-align: left;
       font-size: 16px;
       line-height: 24px;
+
+      &:last-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+          margin-left: 16px;
+          border: 0;
+          color: #12a454;
+          background-color: transparent;
+          display: flex;
+          justify-content: center;
+          /* padding: 6px; */
+        }
+      }
 
       &:last-child,
       &:nth-child(3) {
@@ -122,6 +138,14 @@ export const TableContainer = styled.section`
 
     td:last-child {
       border-radius: 0 8px 8px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      button {
+        margin-left: 16px;
+        border: 0;
+        color: #e83f5b;
+      }
       @media (max-width: 635px) {
         display: none;
       }
