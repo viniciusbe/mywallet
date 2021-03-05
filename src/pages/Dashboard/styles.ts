@@ -59,9 +59,23 @@ export const Card = styled.div`
   }
 `;
 
-export const TableContainer = styled.section`
-  margin-top: 64px;
+export const AddTransaction = styled.button`
+  margin: 2rem 0 1.5rem auto;
+  border: 0;
+  color: #222831;
+  background-color: #12a454;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px;
 
+  p {
+    margin-right: 8px;
+  }
+`;
+
+export const TableContainer = styled.section`
   table {
     width: 100%;
     border-spacing: 0 8px;
@@ -69,7 +83,7 @@ export const TableContainer = styled.section`
     th {
       color: #969cb3;
       font-weight: normal;
-      padding: 20px 32px;
+      padding: 0 32px 8px;
       text-align: left;
       font-size: 16px;
       line-height: 24px;
@@ -78,16 +92,6 @@ export const TableContainer = styled.section`
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        button {
-          margin-left: 16px;
-          border: 0;
-          color: #12a454;
-          background-color: transparent;
-          display: flex;
-          justify-content: center;
-          /* padding: 6px; */
-        }
       }
 
       &:last-child,
@@ -141,11 +145,13 @@ export const TableContainer = styled.section`
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       button {
         margin-left: 16px;
         border: 0;
         color: #e83f5b;
       }
+
       @media (max-width: 635px) {
         display: none;
       }

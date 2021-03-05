@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FaTrashAlt, FaPlus } from 'react-icons/fa';
+import { FaTrashAlt, FaPlusCircle } from 'react-icons/fa';
 
 import income from '../../assets/income.svg';
 import outcome from '../../assets/outcome.svg';
@@ -12,7 +12,13 @@ import Header from '../../components/Header';
 import formatValue from '../../utils/formatValue';
 import formatDate from '../../utils/formatDate';
 
-import { Container, CardContainer, Card, TableContainer } from './styles';
+import {
+  Container,
+  CardContainer,
+  Card,
+  AddTransaction,
+  TableContainer,
+} from './styles';
 import ModalAddTransaction from '../../components/Modal';
 
 interface Transaction {
@@ -42,7 +48,7 @@ interface Balance {
 const Dashboard: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [balance, setBalance] = useState<Balance>({} as Balance);
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     async function loadTransactions(): Promise<void> {
@@ -136,6 +142,11 @@ const Dashboard: React.FC = () => {
           </Card>
         </CardContainer>
 
+        <AddTransaction type="button" onClick={toggleModal}>
+          <p>Add transaction</p>
+          <FaPlusCircle />
+        </AddTransaction>
+
         <TableContainer>
           <table>
             <thead>
@@ -143,12 +154,7 @@ const Dashboard: React.FC = () => {
                 <th>Title</th>
                 <th>Price</th>
                 <th>Category</th>
-                <th>
-                  Date
-                  <button type="button" onClick={toggleModal}>
-                    <FaPlus />
-                  </button>
-                </th>
+                <th>Date</th>
               </tr>
             </thead>
 
